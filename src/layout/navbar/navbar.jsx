@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Menu, Row, Col, Dropdown, Divider, Input } from 'antd';
+import { NavLink, Link, Redirect } from 'react-router-dom';
+import { Menu, Row, Col, Dropdown, Divider, Input, Layout, Select } from 'antd';
 import {
   DownOutlined,
   AntCloudOutlined,
@@ -8,68 +8,56 @@ import {
 } from '@ant-design/icons';
 
 class Navbar extends Component {
-  state = { current: '/' };
-  handleClick = (e) => {
-    // console.log(e);
-    this.setState({
-      current: e.key,
-    });
+  state = { current: true, path: this.props.path };
+  handleChange = (e) => {
+    console.log(e, 'handleChange');
+    this.setState({ current: false, path: e });
   };
   render() {
-    const menu = (
-      <Menu onClick={this.handleClick}>
-        <Menu.Item>Discover</Menu.Item>
-        <Menu.Item>My message</Menu.Item>
-        <Menu.Item>profile</Menu.Item>
-      </Menu>
-    );
+    console.log(this.state);
     return (
-      <Row gutter={0}>
-        <Col span={1}>
-          <NavLink to="/">
-            <img
-              src="https://img.icons8.com/color/20/000000/linkedin.png"
-              alt="some"
+      <Layout.Header style={{ backgroundColor: 'white' }}>
+        <Row gutter={0}>
+          <Col span={1}>
+            <NavLink to="/">
+              <img
+                src="https://img.icons8.com/color/20/000000/linkedin.png"
+                alt="some"
+              />
+            </NavLink>
+            <Divider type="vertical" />
+          </Col>
+          <Col span={4}>
+            <Row justify="start">
+              <Select
+                defaultValue={this.props.name}
+                onChange={this.handleChange}
+                style={{ width: 120, marginTop: '10%' }}
+              >
+                <Select.Option value="/discover">discover</Select.Option>
+                <Select.Option value="/profile">profile</Select.Option>
+              </Select>
+              {!this.state.current && <Redirect to={`${this.state.path}`} />}
+            </Row>
+          </Col>
+          <Col span={16}>
+            <Input.Search
+              placeholder="input search text"
+              onSearch={(value) => console.log(value)}
+              style={{ width: '60%' }}
             />
-          </NavLink>
-          <Divider type="vertical" />
-        </Col>
-        <Col span={4}>
-          <Row justify="start">
-            <Dropdown overlay={menu}>
-              <a href="//#endregion" className="ant-dropdown-link">
-                Menu <DownOutlined />
-              </a>
-            </Dropdown>
-          </Row>
-        </Col>
-        <Col span={13}>
-          <Input.Search
-            placeholder="input search text"
-            onSearch={(value) => console.log(value)}
-            style={{ width: '60%' }}
-          />
-        </Col>
-        <Col span={6}>
-          <Menu
-            onClick={this.handleClick}
-            mode="horizontal"
-            style={{ lineHeight: '54px', float: 'right' }}
-          >
-            <Menu.Item>
-              <NavLink to="">
-                <AntCloudOutlined style={{ fontSize: '15px', padding: '5%' }} />
-              </NavLink>
-            </Menu.Item>
-            <Menu.Item>
-              <NavLink to="">
-                <FlagOutlined style={{ fontSize: '15px', padding: '5%' }} />
-              </NavLink>
-            </Menu.Item>
+          </Col>
+          <Col span={3}>
+            <Link to="/notifications">
+              <AntCloudOutlined style={{ fontSize: '15px', padding: '10%' }} />
+            </Link>
+            <Link to="/message">
+              <FlagOutlined style={{ fontSize: '15px', padding: '5%' }} />
+            </Link>
             {/* admin menu */}
-          </Menu>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      </Layout.Header>
     );
   }
 }

@@ -6,7 +6,10 @@ const MainLayout = (props) => {
   return (
     <div>
       <Layout>
-        <Navbar upperNav={props.children.props.match.path} />
+        <Navbar
+          path={props.children.props.match.path}
+          name={props.children.type.name}
+        />
         <main>
           {/* {childern} */}
           {props.children}
