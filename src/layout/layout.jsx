@@ -9,6 +9,7 @@ const MainLayout = (props) => {
         <Navbar
           path={props.children.props.match.path}
           name={props.children.type.name}
+          user={props.user}
         />
         <main>
           {/* {childern} */}

@@ -20,4 +20,4 @@ app.use('/api/profile', profiles);
 app.use('/api/auth', auth);
 app.use('/api/users', users);
 
-app.listen(3000, () => console.log('on port 3000'));
+app.listen(3900, () => console.log('on port 3900'));

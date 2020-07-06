@@ -5,13 +5,14 @@ import MainLayout from '../layout/layout';
 import Discover from '../views/discover/discover';
 import Profile from '../views/profile/profile';
 
-const Routes = () => {
+const Routes = ({ user }) => {
   return (
     <Switch>
       <Redirect exact from="/" to="/discover" />
       <RouteWithLayout
         component={Discover}
         exact
+        user={user}
         layout={MainLayout}
         path="/discover"
       />

@@ -64,10 +64,7 @@ class Navbar extends Component {
             {user && (
               <React.Fragment>
                 <Button type="link">
-                  <NavLink to="/profile">
-                    {/* {user.name} */}
-                    ishan
-                  </NavLink>
+                  <NavLink to="/profile">{user.name}</NavLink>
                 </Button>
                 <Button type="primary">
                   <NavLink to="/logout">Logout</NavLink>
