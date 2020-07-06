@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import { NavLink, Link, Redirect } from 'react-router-dom';
-import { Menu, Row, Col, Dropdown, Divider, Input, Layout, Select } from 'antd';
-import {
-  DownOutlined,
-  AntCloudOutlined,
-  FlagOutlined,
-} from '@ant-design/icons';
+import { Row, Col, Divider, Input, Layout, Select, Button } from 'antd';
+import { AntCloudOutlined, FlagOutlined } from '@ant-design/icons';
 
 class Navbar extends Component {
   state = { current: true, path: this.props.path };
+
   handleChange = (e) => {
     console.log(e, 'handleChange');
     this.setState({ current: false, path: e });
   };
   render() {
-    console.log(this.state);
+    const { user } = this.props;
     return (
       <Layout.Header style={{ backgroundColor: 'white' }}>
         <Row gutter={0}>
@@ -40,21 +37,43 @@ class Navbar extends Component {
               {!this.state.current && <Redirect to={`${this.state.path}`} />}
             </Row>
           </Col>
-          <Col span={16}>
+          <Col span={13}>
             <Input.Search
               placeholder="input search text"
               onSearch={(value) => console.log(value)}
               style={{ width: '60%' }}
             />
           </Col>
-          <Col span={3}>
+          <Col span={6}>
             <Link to="/notifications">
               <AntCloudOutlined style={{ fontSize: '15px', padding: '10%' }} />
             </Link>
             <Link to="/message">
               <FlagOutlined style={{ fontSize: '15px', padding: '5%' }} />
             </Link>
-            {/* admin menu */}
+            {!user && (
+              <React.Fragment>
+                <Button type="primary">
+                  <NavLink to="/login">Login</NavLink>
+                </Button>
+                <Button type="link">
+                  <NavLink to="/register">Register</NavLink>
+                </Button>
+              </React.Fragment>
+            )}
+            {user && (
+              <React.Fragment>
+                <Button type="link">
+                  <NavLink to="/profile">
+                    {/* {user.name} */}
+                    ishan
+                  </NavLink>
+                </Button>
+                <Button type="primary">
+                  <NavLink to="/logout">Logout</NavLink>
+                </Button>
+              </React.Fragment>
+            )}
           </Col>
         </Row>
       </Layout.Header>
