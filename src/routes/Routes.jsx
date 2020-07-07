@@ -4,6 +4,7 @@ import RouteWithLayout from './routeWithLayouts';
 import MainLayout from '../layout/layout';
 import Discover from '../views/discover/discover';
 import Profile from '../views/profile/profile';
+import Register from '../views/register/register';
 
 const Routes = ({ user }) => {
   return (
@@ -21,6 +22,12 @@ const Routes = ({ user }) => {
         exact
         layout={MainLayout}
         path="/profile"
+      />
+      <RouteWithLayout
+        component={Register}
+        exact
+        layout={MainLayout}
+        path="/register"
       />
     </Switch>
   );
