@@ -22,6 +22,7 @@ const Routes = ({ user }) => {
       <RouteWithLayout
         component={Profile}
         exact
+        user={user}
         layout={MainLayout}
         path="/profile"
       />
