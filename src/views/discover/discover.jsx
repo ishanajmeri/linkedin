@@ -6,10 +6,8 @@ import PostView from './components/post/postView';
 class Discover extends Component {
   state = {};
   componentDidMount() {
-    // console.log(this.props.user);
     if (this.props.user === null) {
       window.location = '/login';
-      // console.log(this.props.user);
     }
   }
   render() {

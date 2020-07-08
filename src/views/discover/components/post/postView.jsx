@@ -1,56 +1,37 @@
 import React, { Component } from 'react';
-import { Tabs, Input, Card } from 'antd';
-// import { PencilAlt } from '@styled-icons/fa-solid';
-// import { AddAPhoto } from '@styled-icons/material';
-// import { BookOpen } from '@styled-icons/boxicons-regular';
-
+import { Card, Row, Menu, Input } from 'antd';
+import Icon from 'react-icons-kit';
+import { pencilSquareO } from 'react-icons-kit/fa/pencilSquareO';
+import { ic_add_a_photo } from 'react-icons-kit/md/ic_add_a_photo';
+import { book } from 'react-icons-kit/fa/book';
 class PostView extends Component {
   state = {};
-  handleChange = (e) => {
-    console.log(e.target.value, 'share an update');
+  handlePhoto = () => {
+    console.log('object');
   };
   render() {
     return (
       <Card>
-        <Tabs defaultActiveKey="1" size="small">
-          <Tabs.TabPane
-            tab={
-              <span>
-                {/* <PencilAlt size="12" /> */}
-                &nbsp;Share an update
-              </span>
-            }
-            key="1"
-          >
-            <Input.TextArea
-              row={3}
-              placeholder="write something.."
-              onChange={this.handleChange}
-            />
-          </Tabs.TabPane>
-          <Tabs.TabPane
-            tab={
-              <span>
-                {/* <AddAPhoto size="12" /> */}
-                &nbsp;Upload a photo
-              </span>
-            }
-            key="2"
-          >
-            {/* <Upload /> */}upload
-          </Tabs.TabPane>
-          <Tabs.TabPane
-            tab={
-              <span>
-                {/* <BookOpen size="12" /> */}
-                &nbsp;Write an article
-              </span>
-            }
-            key="3"
-          >
-            article
-          </Tabs.TabPane>
-        </Tabs>
+        <Row>
+          <Menu defaultSelectedKeys={['1']} mode="horizontal">
+            <Menu.Item key="1">
+              <Icon icon={pencilSquareO} />
+              &nbsp; Share an update
+            </Menu.Item>
+            <Menu.Item key="2" onClick={this.handlePhoto}>
+              <Icon icon={ic_add_a_photo} />
+              &nbsp; Upload a photo
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Icon icon={book} />
+              &nbsp;Write an article
+            </Menu.Item>
+          </Menu>
+        </Row>
+        <br />
+        <Row>
+          <Input.TextArea placeholder="write something" />
+        </Row>
       </Card>
     );
   }

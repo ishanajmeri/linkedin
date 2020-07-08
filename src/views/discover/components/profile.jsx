@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 
-const Profile = () => {
+const Profile = ({ user }) => {
   return (
     <>
       <Card
@@ -26,13 +26,13 @@ const Profile = () => {
         ]}
       >
         <div style={{ marginLeft: '25%' }}>
-          <strong>Caronline Belfort</strong>
+          <strong>{user ? user.name : null}</strong>
           <p>Statton oakmont</p>
         </div>
       </Card>
       <Card style={{ width: '85%' }}>
         <div style={{ textAlign: 'center' }}>
-          <Link to="">View my profile</Link>
+          <Link to="/profile">View my profile</Link>
         </div>
       </Card>
     </>
