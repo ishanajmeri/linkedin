@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Card, Form, Input, Row, Button, Alert } from 'antd';
-import { Redirect } from 'react-router-dom';
+import { Card, Form, Input, Row, Button, Alert, Checkbox } from 'antd';
+import { Redirect, Link } from 'react-router-dom';
 import auth from '../../services/authService';
 
 class Login extends Component {
@@ -69,9 +69,24 @@ class Login extends Component {
               <Input.Password placeholder="Password" />
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit">
-                Login
+              <Form.Item name="remember" valuePropName="checked" noStyle>
+                <Checkbox>Remember me</Checkbox>
+              </Form.Item>
+
+              <Link style={{ float: 'right' }} to="">
+                Forgot password
+              </Link>
+            </Form.Item>
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                style={{ width: '300px' }}
+              >
+                Log in
               </Button>
+              <br />
+              Or <Link to="/register">register now!</Link>
             </Form.Item>
           </Form>
         </Row>

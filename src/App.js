@@ -8,7 +8,7 @@ import './App.css';
 const browserHistory = createBrowserHistory();
 
 class App extends Component {
-  state = { user: {} };
+  state = { user: null };
   componentDidMount() {
     const user = auth.getCurrentUser();
     this.setState({ user });
