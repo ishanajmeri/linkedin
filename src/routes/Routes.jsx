@@ -5,6 +5,8 @@ import MainLayout from '../layout/layout';
 import Discover from '../views/discover/discover';
 import Profile from '../views/profile/profile';
 import Register from '../views/register/register';
+import Logout from '../views/logout/logout';
+import Login from '../views/login/login';
 
 const Routes = ({ user }) => {
   return (
@@ -28,6 +30,18 @@ const Routes = ({ user }) => {
         exact
         layout={MainLayout}
         path="/register"
+      />
+      <RouteWithLayout
+        component={Login}
+        exact
+        layout={MainLayout}
+        path="/login"
+      />
+      <RouteWithLayout
+        component={Logout}
+        exact
+        layout={MainLayout}
+        path="/logout"
       />
     </Switch>
   );

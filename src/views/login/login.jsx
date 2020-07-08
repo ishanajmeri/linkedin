@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { Card, Form, Input, Row, Button, Alert } from 'antd';
-import * as userService from '../../services/userServices';
+import { Redirect } from 'react-router-dom';
 import auth from '../../services/authService';
 
-class Register extends Component {
+class Login extends Component {
   state = {
     errors: null,
   };
   handleFinish = async (values) => {
     try {
-      const response = await userService.register(values);
-      auth.loginWithJwt(response.headers['x-auth-token']);
-      window.location = '/';
+      await auth.login(values.username, values.password);
+      const { state } = this.props.location;
+      window.location = state ? state.from.pathname : '/';
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         var errors = this.state.errors;
@@ -21,10 +21,11 @@ class Register extends Component {
     }
   };
   render() {
+    if (auth.getCurrentUser()) return <Redirect to="/" />;
     return (
       <Card>
         <Row justify="center">
-          <h3>Register</h3>
+          <h3>Login</h3>
         </Row>
         <Row justify="center">
           <Form onFinish={this.handleFinish}>
@@ -67,18 +68,9 @@ class Register extends Component {
             >
               <Input.Password placeholder="Password" />
             </Form.Item>
-            <Form.Item
-              label="Name"
-              name="name"
-              rules={[
-                { required: true, message: 'Please input your username!' },
-              ]}
-            >
-              <Input placeholder="Name" />
-            </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit">
-                Submit
+                Login
               </Button>
             </Form.Item>
           </Form>
@@ -88,4 +80,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default Login;
