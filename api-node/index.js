@@ -3,6 +3,7 @@ const app = express();
 const profiles = require('./routes/profiles');
 const auth = require('./routes/auth');
 const users = require('./routes/users');
+const upload = require('./routes/upload');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
@@ -32,5 +33,6 @@ app.all('*', (req, res, next) => {
 app.use('/api/profile', profiles);
 app.use('/api/auth', auth);
 app.use('/api/users', users);
+app.use('/api/upload', upload);
 
 app.listen('3900', () => console.log('on port 3900'));
